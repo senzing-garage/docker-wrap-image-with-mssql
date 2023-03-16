@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=debian:11.6-slim@sha256:98d3b4b0cee264301eb1354e0b549323af2d0633e1c43375d0b25c01826b6790
+ARG BASE_IMAGE=debian:11.6-slim@sha256:8eaee63a5ea83744e62d5bf88e7d472d7f19b5feda3bfc6a2304cc074f269269
 FROM ${BASE_IMAGE}
 
 ENV REFRESHED_AT=2023-03-16
@@ -9,18 +9,18 @@ LABEL Name="senzing/wrap-with-mssql" \
 
 USER root
 
-# Install packages via apt.
+# Install packages via apt-get.
 
-RUN apt update \
- && apt -y install \
-      curl
+RUN apt-get update
+RUN apt-get -y install \
+      wget
 
 # MsSQL support.
 
 ENV ACCEPT_EULA=Y
 
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
- && curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+RUN wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg \
+ && wget -qO - https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list \
  && apt-get update \
  && apt-get -y install \
       msodbcsql17 \
