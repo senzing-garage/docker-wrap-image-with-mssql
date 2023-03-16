@@ -17,6 +17,7 @@ RUN chmod 1777 /tmp
 
 RUN apt-get update
 RUN apt-get -y install \
+      gnupg \
       wget
 
 # MsSQL support.
