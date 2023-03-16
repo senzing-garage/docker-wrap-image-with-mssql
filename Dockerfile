@@ -9,6 +9,10 @@ LABEL Name="senzing/wrap-with-mssql" \
 
 USER root
 
+# Work-around for apt-get update error.
+
+RUN chmod 1777 /tmp
+
 # Install packages via apt-get.
 
 RUN apt-get update

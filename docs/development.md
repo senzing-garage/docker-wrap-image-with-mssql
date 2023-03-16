@@ -1,4 +1,4 @@
-# initdatabase development
+# Development
 
 ## Install
 
@@ -55,8 +55,6 @@ These are "one-time tasks" which may already have been completed.
     sudo --preserve-env make docker-build
     ```
 
-
 ## Test
-
 
 ## Package

@@ -19,8 +19,6 @@ to add files to an existing Docker image.
 
 1. [Overview](#overview)
     1. [Preamble](#preamble)
-    1. [Legend](#legend)
-    1. [Related artifacts](#related-artifacts)
     1. [Expectations](#expectations)
 1. [Create containers](#create-containers)
 1. [License](#license)
@@ -32,21 +30,11 @@ At [Senzing](http://senzing.com),
 we strive to create GitHub documentation in a
 "[don't make me think](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/dont-make-me-think.md)" style.
 For the most part, instructions are copy and paste.
-Whenever thinking is needed, it's marked with a "thinking" icon :thinking:.
-Whenever customization is needed, it's marked with a "pencil" icon :pencil2:.
+[Icons](https://github.com/Senzing/knowledge-base/blob/main/lists/legend.md)
+are used to signify additional actions by the user.
 If the instructions are not clear, please let us know by opening a new
 [Documentation issue](https://github.com/Senzing/docker-wrap-image-with-mssql/issues/new?template=documentation_request.md)
 describing where we can improve.   Now on with the show...
-
-### Legend
-
-1. :thinking: - A "thinker" icon means that a little extra thinking may be required.
-   Perhaps there are some choices to be made.
-   Perhaps it's an optional step.
-1. :pencil2: - A "pencil" icon means that the instructions may need modification before performing.
-1. :warning: - A "warning" icon means that something tricky is happening, so pay attention.
-
-### Related artifacts
 
 ### Expectations
 
@@ -110,12 +98,9 @@ The following steps show how to wrap existing containers with MsSQL prerequisite
             --build-arg USER=${BASE_IMAGE_USER:-1001} \
             --tag ${BASE_IMAGE_NAME}-mssql:${BASE_IMAGE_VERSION} \
             https://github.com/Senzing/docker-wrap-image-with-mssql.git#main
-
     done
 
     ```
-
-
 
 ## License
 
@@ -143,3 +128,4 @@ with any relevant licenses for all software contained within.
 - [Development](docs/development.md)
 - [Errors](docs/errors.md)
 - [Examples](docs/examples.md)
+- [Legend](https://github.com/Senzing/knowledge-base/blob/main/lists/legend.md)
