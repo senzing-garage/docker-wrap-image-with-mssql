@@ -1,43 +1,39 @@
-ARG BASE_IMAGE=debian:11.6-slim@sha256:98d3b4b0cee264301eb1354e0b549323af2d0633e1c43375d0b25c01826b6790
+ARG BASE_IMAGE=debian:11.6-slim@sha256:8eaee63a5ea83744e62d5bf88e7d472d7f19b5feda3bfc6a2304cc074f269269
 FROM ${BASE_IMAGE}
 
-ENV REFRESHED_AT=2023-01-12
+ENV REFRESHED_AT=2023-03-16
 
-LABEL Name="senzing/template" \
+LABEL Name="senzing/wrap-with-mssql" \
       Maintainer="support@senzing.com" \
-      Version="1.3.2"
-
-HEALTHCHECK CMD ["/app/healthcheck.sh"]
-
-# Run as "root" for system installation.
+      Version="1.0.0"
 
 USER root
 
-RUN apt-get update \
+# Work-around for apt-get update error.
+
+RUN chmod 1777 /tmp
+
+# Install packages via apt-get.
+
+RUN apt-get update
+RUN apt-get -y install \
+      gnupg \
+      wget
+
+# MsSQL support.
+
+ENV ACCEPT_EULA=Y
+
+RUN wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg \
+ && wget -qO - https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+ && apt-get update \
  && apt-get -y install \
-      python3 \
-      python3-pip \
- && apt-get clean \
+      msodbcsql17 \
  && rm -rf /var/lib/apt/lists/*
 
-# Install packages via PIP.
+RUN rm /opt/senzing/g2/sdk/python/senzing_governor.py || true
 
-COPY requirements.txt ./
-RUN pip3 install --upgrade pip \
- && pip3 install -r requirements.txt \
- && rm requirements.txt
+# Set/Reset the USER.
 
-# Install packages via apt.
-
-# Copy files from repository.
-
-COPY ./rootfs /
-
-# Make non-root container.
-
-USER 1001
-
-# Runtime execution.
-
-WORKDIR /app
-CMD ["/app/sleep-infinity.sh"]
+ARG USER=1005
+USER ${USER}
