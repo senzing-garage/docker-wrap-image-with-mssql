@@ -98,6 +98,7 @@ The following steps show how to wrap existing containers with MsSQL prerequisite
             --build-arg USER=${BASE_IMAGE_USER:-1001} \
             --tag ${BASE_IMAGE_NAME}-mssql:${BASE_IMAGE_VERSION} \
             https://github.com/Senzing/docker-wrap-image-with-mssql.git#main
+
     done
 
     ```
