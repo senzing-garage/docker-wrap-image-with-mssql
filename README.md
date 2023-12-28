@@ -1,5 +1,17 @@
 # docker-wrap-with-mssql
 
+If you are beginning your journey with
+[Senzing](https://senzing.com/),
+please start with
+[Senzing Quick Start guides](https://docs.senzing.com/quickstart/).
+
+You are in the
+[Senzing Garage](https://github.com/senzing-garage)
+where projects are "tinkered" on.
+Although this GitHub repository may help you understand an approach to using Senzing,
+it's not considered to be "production ready" and is not considered to be part of the Senzing product.
+Heck, it may not even be appropriate for your application of Senzing!
+
 ## Synopsis
 
 Wrap a Docker image with support for MsSQL database.
@@ -24,7 +36,7 @@ to add files to an existing Docker image.
 1. [License](#license)
 1. [References](#references)
 
-### Preamble
+## Preamble
 
 At [Senzing](http://senzing.com),
 we strive to create GitHub documentation in a
