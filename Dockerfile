@@ -4,8 +4,8 @@ FROM ${BASE_IMAGE}
 ENV REFRESHED_AT=2023-03-16
 
 LABEL Name="senzing/wrap-with-mssql" \
-      Maintainer="support@senzing.com" \
-      Version="1.0.0"
+  Maintainer="support@senzing.com" \
+  Version="1.0.0"
 
 USER root
 
@@ -17,21 +17,23 @@ RUN chmod 1777 /tmp
 
 RUN apt-get update
 RUN apt-get -y install \
-      gnupg \
-      wget
+  gnupg \
+  wget
 
 # MsSQL support.
 
 ENV ACCEPT_EULA=Y
 
 RUN wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg \
- && wget -qO - https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list \
- && apt-get update \
- && apt-get -y install \
-      msodbcsql17 \
- && rm -rf /var/lib/apt/lists/*
+  && wget -qO - https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+  && apt-get update \
+  && apt-get -y install \
+  msodbcsql17 \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN rm /opt/senzing/g2/sdk/python/senzing_governor.py || true
+
+HEALTHCHECK CMD ["/app/healthcheck.sh"]
 
 # Set/Reset the USER.
 
